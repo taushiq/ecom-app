@@ -1,0 +1,239 @@
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Checkout</h3>
+						<ul class="breadcrumb-tree">
+							<li><a >Home</a></li>
+							<li class="active">Checkout</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+
+				<div>
+					
+					<h2 *ngIf="emptyCart" style="color: #D10024">You do not have any products in your Cart to Order!</h2>
+				<br>
+				</div>
+				<!-- row -->
+				<form #form = "ngForm" (ngSubmit)="formSubmit()" >
+
+				<div class="row">
+
+					<div class="col-md-7">
+						<!-- Billing Details -->
+						<div class="billing-details">
+							<div class="section-title">
+								<h3 class="title">Billing address</h3>
+							</div>
+							
+							<div class="form-group">
+								<input [ngClass]= "{ 'bordered': firstname.dirty && firstname.errors }" class="input" type="text" name="firstname" #firstname="ngModel" required pattern="[a-zA-Z\s ]*" pattern="[a-zA-Z\s ]*" [(ngModel)]="orderModel.firstname" minlength="2" placeholder="First Name">
+								<div class="text-danger" *ngIf="firstname.dirty && firstname.errors">
+									<small *ngIf="firstname.errors.required"> First Name is mandatory</small>
+									<small *ngIf="firstname.errors.minlength"> Minimum 2 letter required</small>
+									<small *ngIf="firstname.errors.pattern"> Please enter valid First Name</small>
+								</div>
+							</div>
+							<div class="form-group">
+								<input [ngClass]= "{ 'bordered': lastname.dirty && lastname.errors }" class="input" type="text" name="lastname" #lastname="ngModel" required pattern="[a-zA-Z\s ]*" [(ngModel)]="orderModel.lastname" minlength="2" placeholder="Last Name">
+								<div class="text-danger" *ngIf="lastname.dirty && lastname.errors">
+									<small *ngIf="lastname.errors.required"> Last Name is mandatory</small>
+									<small *ngIf="lastname.errors.minlength"> Minimum 2 letter required</small>
+									<small *ngIf="lastname.errors.pattern"> Please enter valid Last Name</small>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<input [ngClass]= "{ 'bordered': address.dirty && address.errors }" class="input" type="text" name="address" #address="ngModel" required [(ngModel)]="orderModel.address" placeholder="Address">
+								<div class="text-danger" *ngIf="address.dirty && address.errors">
+									<small *ngIf="address.errors.required"> Address is mandatory</small>
+								</div>
+							</div>
+							<div class="form-group">
+								<input [ngClass]= "{ 'bordered': city.dirty && city.errors }" class="input" type="text" name="city" #city="ngModel" required pattern="[a-zA-Z\s ]*" [(ngModel)]="orderModel.city" placeholder="City">
+								<div class="text-danger" *ngIf="city.dirty && city.errors">
+									<small *ngIf="city.errors.required"> City is mandatory</small>
+									<small *ngIf="city.errors.pattern"> Please enter valid city</small>
+									
+								</div>
+							</div>
+							<div class="form-group">
+								<input [ngClass]= "{ 'bordered': country.dirty && country.errors }" class="input" type="text" name="country" #country="ngModel" required pattern="[a-zA-Z\s ]*" [(ngModel)]="orderModel.country" placeholder="Country">
+								<div class="text-danger" *ngIf="country.dirty && country.errors">
+									<small *ngIf="country.errors.required"> Country is mandatory</small>
+									<small *ngIf="country.errors.pattern"> Please enter valid country</small>
+									
+								</div>
+							</div>
+							<div class="form-group">
+								<input [ngClass]= "{ 'bordered': zipcode.dirty && zipcode.errors }" class="input" type="text" name="zipcode" #zipcode="ngModel" required pattern="\d+" [(ngModel)]="orderModel.zipcode" placeholder="ZIP Code">
+								<div class="text-danger" *ngIf="zipcode.dirty && zipcode.errors">
+									<small *ngIf="zipcode.errors.required"> Zip Code is mandatory</small>
+									<small *ngIf="zipcode.errors.pattern"> Only Numbers allowed</small>
+								</div>
+							</div>
+							<div class="form-group">
+								<input [ngClass]= "{ 'bordered': mobile.dirty && mobile.errors }" class="input" type="tel" name="mobile" #mobile="ngModel" required pattern="\d{10}" [(ngModel)]="orderModel.mobile" placeholder="Mobile Number">
+								<div class="text-danger" *ngIf="mobile.dirty && mobile.errors">
+									<small *ngIf="mobile.errors.required"> Mobile Number is mandatory</small>
+									<small *ngIf="mobile.errors.pattern"> Mobile Number should be 10 be digits</small>
+									
+								</div>
+							</div>
+							<!-- <div class="form-group">
+								<div class="input-checkbox">
+									<input type="checkbox" id="create-account">
+									<label for="create-account">
+										<span></span>
+										Create Account?
+									</label>
+									<div class="caption">
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+										<input class="input" type="password" name="password" placeholder="Enter Your Password">
+									</div>
+								</div>
+							</div> -->
+						</div>
+						<!-- /Billing Details -->
+
+						<!-- Shiping Details -->
+						<!-- <div class="shiping-details">
+							<div class="section-title">
+								<h3 class="title">Shiping address</h3>
+							</div>
+							<div class="input-checkbox">
+								<input type="checkbox" id="shiping-address">
+								<label for="shiping-address">
+									<span></span>
+									Ship to a diffrent address?
+								</label>
+								<div class="caption">
+									<div class="form-group">
+										<input class="input" type="text" name="first-name" placeholder="First Name">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="last-name" placeholder="Last Name">
+									</div>
+									<div class="form-group">
+										<input class="input" type="email" name="email" placeholder="Email">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="address" placeholder="Address">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="city" placeholder="City">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="country" placeholder="Country">
+									</div>
+									<div class="form-group">
+										<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+									</div>
+									<div class="form-group">
+										<input class="input" type="tel" name="tel" placeholder="Telephone">
+									</div>
+								</div>
+							</div>
+						</div> -->
+						<!-- /Shiping Details -->
+
+						<!-- Order notes -->
+						<div class="order-notes">
+							<textarea class="input" name="note" #note="ngModel"  [(ngModel)]="orderModel.note" placeholder="Order Notes"></textarea>
+						</div>
+						<!-- /Order notes -->
+					</div>
+
+					<!-- Order Details -->
+					<div class="col-md-5 order-details">
+						<div class="section-title text-center">
+							<h3 class="title">Your Order</h3>
+						</div>
+						<div class="order-summary">
+							<div class="order-col">
+								<div><strong>PRODUCT</strong></div>
+								<div><strong>TOTAL</strong></div>
+							</div>
+							<div class="order-products">
+								<div class="order-col" *ngFor = "let p of customerComponentCart">
+									<div> {{ p.numInCart }} x {{ p.product.name }}</div>
+									<div>{{ p.product.productSubTotal ? p.product.productSubTotal : '0' }}</div>
+								</div>
+								
+							</div>
+							<div class="order-col">
+								<div>Shipping</div>
+								<div><strong>FREE</strong></div>
+							</div>
+							<div class="order-col">
+								<div><strong>TOTAL</strong></div>
+								<div><strong class="order-total">{{ subTotal | currency: "INR"}}</strong></div>
+							</div>
+						</div>
+						<div class="payment-method">
+							<div class="input-radio">
+								<input type="radio" checked name="payment" id="payment-1">
+								<label for="payment-1">
+									<span></span>
+									Cash on Delivery
+								</label>
+								<div class="caption">
+									<p>Please pay the amount to the Delivery Executive</div>
+							</div>
+							<!-- <div class="input-radio">
+								<input type="radio" name="payment" id="payment-2">
+								<label for="payment-2">
+									<span></span>
+									Cheque Payment
+								</label>
+								<div class="caption">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+								</div>
+							</div>
+							<div class="input-radio">
+								<input type="radio" name="payment" id="payment-3">
+								<label for="payment-3">
+									<span></span>
+									Paypal System
+								</label>
+								<div class="caption">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+								</div>
+							</div> -->
+						</div>
+						<div class="input-checkbox">
+							<input type="checkbox" checked disabled="true" id="terms">
+							<label for="terms">
+								<span></span>
+								I've read and accept the <a >terms & conditions</a>
+							</label>
+						</div>
+						<div>
+							<br><br>
+							<h5 *ngIf="emptyCart" style="color: #D10024">Please add products to cart to place order!</h5>
+						</div>
+						<button *ngIf="!emptyCart" [ngClass]= "{ 'disabled': form.invalid}" 
+							type="submit" [disabled]="form.invalid" class="primary-btn order-submit">Place order</button>
+					</div>
+					<!-- /Order Details -->
+				</div>
+				<!-- /row -->
+			</form>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->

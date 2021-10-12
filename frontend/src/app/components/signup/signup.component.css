@@ -1,0 +1,39 @@
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #D10024;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #ee778b;
+}
+
+.btn-primary:focus{
+    box-shadow: 0 0 0 0.2rem #ee778b;
+    border-color: #D10024;
+}
+
+.btn:focus{
+    box-shadow: 0 0 0 0.2rem #ee778b;
+    border-color: #D10024;
+}
+
+.btn{
+    color: white;
+}
+
+.btn:active{
+    font-size: 90%;
+}
+
+.signup{
+    color: #D10024;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bordered{
+    border-bottom: solid 2px red;
+}
+
+.disabled{
+    cursor: not-allowed;
+}

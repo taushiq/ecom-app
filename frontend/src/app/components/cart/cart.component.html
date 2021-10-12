@@ -1,0 +1,54 @@
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Your Cart</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Cart</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row" style="justify-content: center;">
+
+            <div class="card mt-2 mb-2 mr-2 ml-2" style="width:400px; " *ngFor="let c of customerComponentCart">
+              <img style="cursor: pointer;" (click) = "selectProduct(c.product.id)" class="card-img-top" src="{{c.product.image}}" alt="Card image">
+              <div class="card-body">
+                <h4 class="card-title">{{c.product.name}}</h4>
+                
+                <p class="card-text noselect"> <span class="symbol" (click)="updateCart(c.product , 'delete')">-</span> Quantity <span class="symbol" (click)="updateCart(c.product , 'add')">+</span> : {{c.numInCart}}</p>
+                <h5 class="pull-right justify-content">SubTotal : {{ c.product.productSubTotal ? c.product.productSubTotal : '0' }}</h5>
+              </div>
+            </div>
+   
+        </div>
+        <br>
+        <h4  style="color: #D10024" *ngIf="emptyCart">Your Cart is Empty!</h4>
+        <h4  *ngIf="!emptyCart">Your Total is : {{ subTotal | currency: "INR"}}</h4>
+        <br>
+        <!-- /row -->
+        <div class="form-group">
+            <button class="btn btn-primary float-right" 
+                    routerLink="/checkout" type="button">
+                 Checkout 
+            </button>
+        </div>
+        <br>
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

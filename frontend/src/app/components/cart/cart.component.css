@@ -1,0 +1,31 @@
+@media only screen and (max-width: 600px) {
+    .product-name {
+      font-size: 0.5rem;
+    }
+  }
+
+  .symbol{
+      
+      cursor: pointer;
+      padding: 0 6px 6px 6px;
+      color: white;
+      font-size: x-large;
+      font-weight: 1000;
+      font-family: cursive;
+      background-color: darksalmon;
+  }
+
+  .noselect {
+    display: inline-block;
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .symbol:active{
+    font-size: medium;
+  }

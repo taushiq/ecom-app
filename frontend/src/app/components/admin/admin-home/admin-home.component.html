@@ -1,0 +1,47 @@
+<!-- BREADCRUMB -->
+<div id="breadcrumb" style="margin-bottom: 0" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Welcome to the Admin Portal!</h3>
+                
+            </div>
+        </div>
+        
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div style="margin:0;padding-top: 0;" class="section">
+    <!-- container -->
+    <div class="container">
+        <div >
+            <!-- NAV -->
+            <ul class="nav">
+                <li class="p-3" routerLinkActive="active"><a routerLink="/adminhome/categories">Categories</a></li>
+                <li class="p-3" routerLinkActive="active"><a routerLink="/adminhome/products">Products</a></li>
+                <li class="p-3" routerLinkActive="active"><a routerLink="/adminhome/orders">Orders</a></li>
+
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- row -->
+        <div class="row">
+
+            
+            
+            <div class="col-md-12">
+                <router-outlet></router-outlet>
+            </div>
+            
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

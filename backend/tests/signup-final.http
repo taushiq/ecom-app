@@ -1,0 +1,21 @@
+POST /warehouse/signupfinal HTTP/1.1
+Content-Type: application/json
+Host: localhost:3000
+
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImZpcnN0bmFtZSI6IlZpbm9kIiwibGFzdG5hbWUiOiJLdW1hciIsImlhdCI6MTU5NjEyNTU3ODQzNn0.TrzBen8dkXtNMsaY0LpSaFe7Icu3LjcSgm6H8hMxewA
+
+
+{
+  "fname": "Taushiq",
+  "lname": "Awais",
+  "lineone": "64D/1B, Monivilla",
+  "linetwo": "Linton Street",
+  "pin": "700014",
+  "city": "Kolkata",
+  "state": "West Bengal",
+  "country": "India",
+  "email": "taushiq.awais007@gmail.com",
+  "mobile": "8444052246",
+  "password": "Kolkata@1",
+  "otpvalue": "5788"
+}

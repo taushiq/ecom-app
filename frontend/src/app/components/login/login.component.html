@@ -1,0 +1,58 @@
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Login</h3>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row" >
+        <div class="col-md-6">
+            
+            <form>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passwd" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="passwd" name="passwd" [(ngModel)]="password">
+                        <div class="text-danger" *ngIf="invalid">
+                            <small >Invalid Username/Password</small>
+                        </div>
+                    </div>
+    
+                </div>
+    
+    
+                
+                <br>
+                <button (click)="login()" class="btn " style="background-color: #D10024;">Login</button>
+                <br><br>
+                <p style="text-align: center;">New Customer? &nbsp; <span routerLink="/signup" class="signup">Sign Up</span> </p>
+            </form>
+        </div>
+    </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+

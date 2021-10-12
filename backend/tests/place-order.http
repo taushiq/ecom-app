@@ -1,0 +1,23 @@
+POST /warehouse/orders/new HTTP/1.1
+Content-Type: application/json
+Host: localhost:3000
+
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImZpcnN0bmFtZSI6IlZpbm9kIiwibGFzdG5hbWUiOiJLdW1hciIsImlhdCI6MTU5NjEyNTU3ODQzNn0.TrzBen8dkXtNMsaY0LpSaFe7Icu3LjcSgm6H8hMxewA
+
+
+{
+  "orderModel": {
+    "firstname": "asdasd",
+    "lastname": "sad",
+    "address": "sada",
+    "city": "dsad",
+    "country": "asda",
+    "zipcode": "123",
+    "mobile": "1231231231",
+    "note": "sda"
+  },
+  "cart": [
+    { "productId": 2, "product": {}, "numInCart": 2 },
+    { "productId": 3, "product": {}, "numInCart": 1 }
+  ]
+}

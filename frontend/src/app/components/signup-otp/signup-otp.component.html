@@ -1,0 +1,61 @@
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Sign Up</h3>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row" >
+        <div class="col-md-6">
+
+            <div *ngIf="isLoading" style="text-align: center;">
+                <br><br>
+                <app-loader></app-loader>
+                <br><br>
+            </div>
+            
+            <form *ngIf="!isLoading" #form = "ngForm" (ngSubmit)="formSubmit()">
+                <h6>An Otp has been sent to your registered Email</h6>
+                <br>
+                <div class="form-group row">
+                    <label for="otp" class="col-sm-2 col-form-label">Enter Otp</label>
+                    <div class="col-sm-10">
+                        <input [ngClass]= "{ 'bordered': otp.dirty && otp.errors }" type="text" pattern="\d{4}" class="form-control" id="otp" name="otp" #otp="ngModel" required [(ngModel)]="otpvalue">
+                        <div class="text-danger" *ngIf="otp.dirty && otp.errors">
+                            <small *ngIf="otp.errors.required"> Please enter otp</small>
+                            <small *ngIf="otp.errors.pattern"> Otp has to be four digits</small>
+                        </div>
+                    </div>
+                </div>
+                
+    
+    
+                
+                <br>
+                <button type="submit" [ngClass]= "{ 'disabled': form.invalid}" [disabled]="form.invalid" class="btn " style="background-color: #D10024;">Submit</button>
+                <br><br>
+                <p style="text-align: center;">Did not receive Email Otp? &nbsp; <span (click)="resendOtp()" class="signup">Resend</span> </p>
+            </form>
+        </div>
+    </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+

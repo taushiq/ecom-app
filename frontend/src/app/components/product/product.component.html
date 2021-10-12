@@ -1,0 +1,146 @@
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row" *ngIf="product">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a >Home</a></li>
+                    <li><a >{{ product.category }}</a></li>
+                    <li class="active">{{ product.name }}</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row" *ngIf="product">
+            
+            <div class="col-md-6">
+
+                <ngb-carousel>  
+                    <ng-template ngbSlide *ngFor="let image of productImages; index as i">  
+                        <img src="{{productImages[i]}}" class="img-fluid" alt="{{product.name}}">  
+                    </ng-template>  
+                </ngb-carousel>
+
+
+
+            </div>
+
+            <div class="col-md-1">
+
+            </div>
+            
+
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details" >
+                    <h2 class="product-name">{{ product.name }}</h2>
+                    <!-- <div>
+                        <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
+                    </div> -->
+                    <div>
+                        <h3 class="product-price">{{ product.price | currency:"&#8377;"}} <del class="product-old-price">{{ randomPriceGenerator(product.price) | currency:"&#8377;"}} </del></h3>
+                        <span class="product-available">{{ product.quantity < 1 ? "Out of Stock" : "In Stock" }}</span>
+                    </div>
+                    <p> {{ product.description }}</p>
+
+                    <!-- <div class="product-options">
+                        <label>
+                            Size
+                            <select class="input-select">
+                                <option value="0">X</option>
+                            </select>
+                        </label>
+                        <label>
+                            Color
+                            <select class="input-select">
+                                <option value="0">Red</option>
+                            </select>
+                        </label>
+                    </div> -->
+
+                    <div class="add-to-cart">
+                        <!-- <div class="qty-label">
+                            Qty
+                            <div class="input-number">
+                                <input type="number">
+                                <span class="qty-up">+</span>
+                                <span class="qty-down">-</span>
+                            </div>
+                        </div> -->
+
+
+
+                        <p *ngIf="productInCart" class="card-text noselect"> <span class="symbol" (click)="updateCart(product, 'delete')">-</span> Quantity <span class="symbol" (click)="updateCart(product, 'add')" >+</span> : {{ numInCart }}</p>
+                
+                        <button [disabled] = "product.quantity < 1" [ngClass]= "{'disabled':product.quantity < 1 }" 
+                            *ngIf="!productInCart" (click)="updateCart(product , 'add')" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> {{ product.quantity < 1 ? "No Stock" : "Add to Cart" }}</button>
+                    </div>
+
+                    <!-- <ul class="product-btns">
+                        <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                        <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+                    </ul> -->
+
+                    <ul class="product-links">
+                        <li>Category:</li>
+                        <li><h6>{{product.category}}</h6></li>
+                        <!-- <li><a href="#">Accessories</a></li> -->
+                    </ul>
+
+                    <!-- <ul class="product-links">
+                        <li>Share:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul> -->
+
+                </div>
+            </div>
+            <!-- /Product details -->
+
+            <!-- Product tab -->
+            <div class="col-md-12">
+                <div id="product-tab">
+                    <!-- product tab nav -->
+                    <ul class="tab-nav">
+                        <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+                        <!-- <li><a data-toggle="tab" href="#tab2">Details</a></li>
+                        <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li> -->
+                    </ul>
+                    <!-- /product tab nav -->
+
+                    <div>
+                        <p>{{ product.long_description }}</p>
+                    </div>
+
+                        
+                    <!-- /product tab content  -->
+                </div>
+            </div>
+            <!-- /product tab -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

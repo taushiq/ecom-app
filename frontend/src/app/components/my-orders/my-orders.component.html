@@ -1,0 +1,59 @@
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">My Orders</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a routerLink="/home">Home</a></li>
+                    <li class="active">My Orders</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <h2  style="color: #D10024" *ngIf="orderData.length == 0" >You haven't ordered anything yet!</h2>
+
+                <div *ngIf="orderData" class="list-group">
+                    <div *ngFor="let o of orderData" class="list-group-item list-group-item-action">
+                        <div class="row">
+                            
+                            <div class="col-md-5"><img style="cursor: pointer;" (click) = "selectProduct(o.productId)" class="img-fluid" src="{{o.image}}" alt=""></div>
+                            <div class="col-md-7">
+                                <h2>{{o.title}}</h2>
+                                <br><br><br>
+                                <h6>Order Status - {{ o.order_status }}</h6>
+                                <h6 *ngIf="o.delivered_date">Delivered Date - {{ o.delivered_date }}</h6>
+                                <h6 *ngIf="o.delivery_date">Estimated Delivery Date - {{o.delivery_date}}</h6>
+                                <br>
+                                <button (click)="cancelOrder(o.orderId, o.productId, o.quantity)" *ngIf="o.delivery_date" class="btn cancel-button">Cancel Order</button>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                    
+                  </div>
+            </div>
+
+            
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

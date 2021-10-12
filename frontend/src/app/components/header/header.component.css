@@ -1,0 +1,7 @@
+@media only screen and (max-width: 991px){
+.main-nav>li>a {
+    padding: 0;
+     color: black;
+     margin: 0 10px;
+}
+}

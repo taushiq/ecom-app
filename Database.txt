@@ -1,0 +1,54 @@
+Users --------------------
+
+id
+username
+password
+email
+fname
+lname
+age
+role
+photo
+type
+isLoggedIn
+LoginTime
+
+--------------------------
+
+Address ------------------
+
+id
+line1
+line2
+city
+state
+country
+phone
+pincode
+user_id
+
+Categories ----------------
+
+id
+title
+
+
+Products -----------------
+
+id
+title
+image
+description
+price
+quantity
+short_desc
+cat_id
+lock
+
+
+Order Details ------------------
+
+id
+user_id
+product_id
+quantity
