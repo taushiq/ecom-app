@@ -79,6 +79,9 @@ export class AuthService {
   logout() {
     this.token = undefined;
     delete window.sessionStorage.token;
+    this.adminToken = undefined;
+    delete window.sessionStorage.adminToken;
+  
   }
 
   signupInitial(signup: any): Observable<any>{

@@ -60,7 +60,7 @@ export class SignupOtpComponent implements OnInit {
             this.isLoading = false;
             Swal.fire({
               icon: 'success',
-              title: 'Otp Sent',
+              title: 'Congrats!',
               confirmButtonColor: '#D10024',
               confirmButtonText: 'GOT IT',
               text: 'Successfully registered!',
