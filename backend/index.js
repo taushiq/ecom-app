@@ -44,13 +44,30 @@ app.get('/warehouse/myorders', require('./handlers/get-my-orders'));
 app.get('/warehouse/:prodId', require('./handlers/get-one-product'));
 // middleware to check if the request contains JWT token in the form of a header, and 
 // allow the user to access any routes, only if the JWT is present and not-tampered
-app.use(require('./middlewares/auth'));
+// app.use(require('./middlewares/auth'));
 
 
 //to get all the order details
 app.get('/warehouse/orders', require('./handlers/get-all-orders'));
 
-//to fetch my orders
+// ----------------  Admin Section  --------------- //
+//to get all the categories
+app.get('/warehouse/admin/getcategories', require('./handlers/get-all-categories'));
+
+//to delete a category
+app.get('/warehouse/admin/deletecategory', require('./handlers/delete-category'));
+
+//to update a category
+app.get('/warehouse/admin/updatecategory', require('./handlers/edit-category'));
+
+//to add a category
+app.get('/warehouse/admin/addcategory', require('./handlers/add-category'));
+
+//to get all the products
+app.get('/warehouse/admin/getproducts', require('./handlers/get-all-products-admin'));
+
+
+//  ------------- Admin Section Ends ------------- //
 
 //place an order
 app.post('/warehouse/orders/new',require('./handlers/place-one-order'))

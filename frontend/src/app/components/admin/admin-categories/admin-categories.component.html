@@ -1,3 +1,52 @@
+<br>
+<h5>The Categories currently present are below</h5>
+<br>
+
 <ul class="list-group">
-    <li class="list-group-item">Cras justo odio</li>
-</ul>
+    <li class="list-group-item" *ngFor="let c of categories; let i = index">{{c.title}} ( id = {{c .id }} )<div class="float-right"><button class="btn btn-primary " (click)="edit(i)">Edit</button ><button class="btn  ml-2 btn-danger" (click)="delete(c.id)">Delete</button></div>
+<br>  <br>  
+        <form *ngIf="editMode && i == index" #form = "ngForm">
+        <div class="form-group">
+            <input [ngClass]= "{ 'bordered': catName.dirty && catName.errors }" class="input" type="text" name="catName" #catName="ngModel" required pattern="[a-zA-Z\s ]*" pattern="[a-zA-Z\s ]*" [(ngModel)]="categoryName" minlength="2" placeholder="Category Name">
+            <div class="text-danger" *ngIf="catName.dirty && catName.errors">
+                <small *ngIf="catName.errors.required"> Category Name is mandatory</small>
+                <small *ngIf="catName.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="catName.errors.pattern"> Please enter valid Category Name</small>
+            </div>
+            <br><br>
+            <button [ngClass]= "{ 'disabled': form.invalid}" 
+				type="button" (click)="formSubmit(c.id)" [disabled]="form.invalid" class="btn btn-primary ">Edit Category</button>
+        </div>
+    </form>
+    </li>
+</ul> 
+
+<br><br> 
+
+<button class="btn btn-primary" (click)="toggleAddCategoryMode()">Add Category</button>
+<br><br>
+<form *ngIf="addCategoryMode" #form = "ngForm" >
+    <div class="form-group">
+        <input [ngClass]= "{ 'bordered': catName.dirty && catName.errors }" class="input" type="text" name="catName" #catName="ngModel" required pattern="[a-zA-Z\s ]*" [(ngModel)]="newCategory.name" minlength="2" placeholder="Category Name">
+        <div class="text-danger" *ngIf="catName.dirty && catName.errors">
+            <small *ngIf="catName.errors.required"> Category Name is mandatory</small>
+            <small *ngIf="catName.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="catName.errors.pattern"> Please enter valid Category Name</small>
+        </div>
+        <br><br>
+        <input [ngClass]= "{ 'bordered': catImage.dirty && catImage.errors }" class="input" type="text" name="catImage" #catImage="ngModel" required  [(ngModel)]="newCategory.imageUrl" minlength="10" placeholder="Category Image Url">
+        <div class="text-danger" *ngIf="catImage.dirty && catImage.errors">
+            <small *ngIf="catImage.errors.required"> Category Image is mandatory</small>
+            <small *ngIf="catImage.errors.minlength"> Minimum 10 letter required</small>
+            
+        </div>
+        <br><br>
+
+        <img class="img-fluid" *ngIf="newCategory.imageUrl" src="{{newCategory.imageUrl}}" alt="Image Cannot be displayed">
+        <br *ngIf="newCategory.imageUrl"><br *ngIf="newCategory.imageUrl" >
+        
+        <button [ngClass]= "{ 'disabled': form.invalid}" 
+            type="button" (click)="addCategorySubmit()" [disabled]="form.invalid" class="btn btn-primary ">Submit</button>
+    </div>
+</form>
+

@@ -1,5 +1,6 @@
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Admin@123';
 flush privileges;
+SET SQL_SAFE_UPDATES = 0;
 
 create database ecomm_app;
 
@@ -19,6 +20,11 @@ CREATE TABLE `users` (
   `isloginin` boolean,
   `loginTime` datetime
 );
+
+insert into users values (2, 'taushiq.awais007@gmail.com', '098F6BCD4621D373CADE4E832627B4F6', 'taushiq.awais007@gmail.com', 'Taushiq', 'Awais', 18, 0, null, 'admin', null, null);
+
+select * from users;
+delete from users where type = 'admin';
 
 
 
@@ -46,6 +52,8 @@ CREATE TABLE `categories` (
 INSERT INTO categories VALUES
 (1, 'Shoes', 'https://m.media-amazon.com/images/I/41Leu3gBUFL.jpg'),
 (2, 'Electronics', 'https://in-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/m/a/maldives_15_df_jetblack_nt_hdcam_nonodd_nonfpr_coreset_front_hi_res.png');
+
+select * from categories;
 
 CREATE TABLE `products` (
   `id` int NOT NULL auto_increment primary key,
@@ -133,6 +141,8 @@ CREATE TABLE `order_details` (
   FOREIGN KEY (user_id) references users(id)
 ) ;
 
+select * from order_details;
+
 
 CREATE TABLE `cancelled_orders` (
   `id` int NOT NULL auto_increment primary key,
@@ -141,9 +151,10 @@ CREATE TABLE `cancelled_orders` (
   `user_id` int Not null,
   `order_id` int Not null,
   `cancelled_on` timestamp default Now(),
-  FOREIGN KEY (product_id) references products(id),
   FOREIGN KEY (user_id) references users(id)
 );
+
+
 
 
 
@@ -159,6 +170,8 @@ create table `otp_stage` (
     `email` varchar(70) NOT NULL primary key,
     `otp` int NOT NULL
 );
+
+
 
 
 

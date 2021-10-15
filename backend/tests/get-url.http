@@ -1,5 +1,5 @@
-# http://localhost:3000/getUrl
+# http://localhost:3000/warehouse
 
-http://localhost:3000/warehouse
+http://localhost:3000/warehouse/admin/getproducts
 
 

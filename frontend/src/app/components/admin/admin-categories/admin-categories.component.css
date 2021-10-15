@@ -1,0 +1,15 @@
+.disabled{
+    cursor: not-allowed;
+    background-color: white;
+    color: #D10024;
+    border: solid 4px #D10024;
+}
+
+button:focus{
+    outline: none; 
+    font-size: 90%;  
+}
+
+.bordered{
+    border-bottom: solid 2px red;
+}
