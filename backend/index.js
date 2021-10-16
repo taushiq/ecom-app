@@ -66,6 +66,15 @@ app.get('/warehouse/admin/addcategory', require('./handlers/add-category'));
 //to get all the products
 app.get('/warehouse/admin/getproducts', require('./handlers/get-all-products-admin'));
 
+//to edit a product 
+app.post('/warehouse/admin/editproduct', require('./handlers/edit-product'));
+
+//to delete a product
+app.get('/warehouse/admin/deleteproduct', require('./handlers/delete-product'));
+
+//to add a product
+app.post('/warehouse/admin/addproduct', require('./handlers/add-product'));
+
 
 //  ------------- Admin Section Ends ------------- //
 

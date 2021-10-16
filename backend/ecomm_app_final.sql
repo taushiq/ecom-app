@@ -49,6 +49,7 @@ CREATE TABLE `categories` (
   `image` text NOT NULL
 ) ;
 
+
 INSERT INTO categories VALUES
 (1, 'Shoes', 'https://m.media-amazon.com/images/I/41Leu3gBUFL.jpg'),
 (2, 'Electronics', 'https://in-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/m/a/maldives_15_df_jetblack_nt_hdcam_nonodd_nonfpr_coreset_front_hi_res.png');
@@ -70,6 +71,8 @@ CREATE TABLE `products` (
   FOREIGN Key (cat_id) references categories(id)
 );
 
+select * from products;
+delete from products;
 
 
 INSERT INTO `products` VALUES
@@ -142,6 +145,7 @@ CREATE TABLE `order_details` (
 ) ;
 
 select * from order_details;
+delete from order_details;
 
 
 CREATE TABLE `cancelled_orders` (
@@ -155,7 +159,7 @@ CREATE TABLE `cancelled_orders` (
 );
 
 
-
+delete from order_details;
 
 
 update order_details set order_status = 'delivered' where id = 2;

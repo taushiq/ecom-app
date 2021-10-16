@@ -4,22 +4,261 @@
 
 
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="let p of productList; let i = index">{{p.title}}<div class="float-right"><button class="btn btn-primary mr-2">Details</button><button class="btn btn-warning " (click)="edit(i)">Edit</button ><button class="btn  ml-2 btn-danger" (click)="delete(c.id)">Delete</button></div>
+    <li class="list-group-item" *ngFor="let p of productList; let i = index">{{p.title}}<div class="float-right"><button (click)="detailsButtonClick(i)" class="btn btn-primary mr-2">Details</button><button class="btn btn-warning " (click)="edit(i)">Edit</button ><button class="btn  ml-2 btn-danger" (click)="deleteProduct(p.id)">Delete</button></div>
 <br>  <br>  
-        <form *ngIf="editMode && i == index" #form = "ngForm">
+        
+
+    <!-- Details tab -->
+    <div style="overflow:auto" class="container" *ngIf="detailsMode && i == detailsIndex">
+        <span style="font-weight: bold;">Product Id : </span> <span>{{p.id}}</span> <br>
+        <span style="font-weight: bold;">Product Title : </span> <span>{{p.title}}</span> <br>
+        <span style="font-weight: bold;">Product Image : </span> <span>{{p.image}}</span> <br>
+        <img class="img-fluid" src="{{p.image}}" alt="Image cannot be displayed"> <br>
+        <span style="font-weight: bold;">Product Description : </span> <span>{{p.description}}</span> <br>
+        <span style="font-weight: bold;">Product Long Description : </span> <span>{{p.long_description}}</span> <br>
+        <span style="font-weight: bold;">Product Short Description : </span> <span>{{p.short_desc}}</span> <br>
+        <span style="font-weight: bold;">Product Price : </span> <span>{{p.price}}</span> <br>
+        <span style="font-weight: bold;">Product Quantity : </span> <span>{{p.quantity}}</span> <br>
+        <span style="font-weight: bold;">Product Category : </span> <span>{{p.cat_id}}</span> <br>
+        <span style="font-weight: bold;">Product Lock : </span> <span>{{p.lock}}</span> <br>
+        
+    </div>
+    <!-- Details tab ends -->
+
+    <!-- Edit Product Tab -->
+
+    <form *ngIf="editMode && i == editIndex" #form = "ngForm">
         <div class="form-group">
-            <input [ngClass]= "{ 'bordered': catName.dirty && catName.errors }" class="input" type="text" name="catName" #catName="ngModel" required pattern="[a-zA-Z\s ]*" pattern="[a-zA-Z\s ]*" [(ngModel)]="categoryName" minlength="2" placeholder="Category Name">
-            <div class="text-danger" *ngIf="catName.dirty && catName.errors">
-                <small *ngIf="catName.errors.required"> Category Name is mandatory</small>
-                <small *ngIf="catName.errors.minlength"> Minimum 2 letter required</small>
-                <small *ngIf="catName.errors.pattern"> Please enter valid Category Name</small>
+            <label >Title</label>
+            <input [ngClass]= "{ 'bordered': title.dirty && title.errors }" class="input" type="text" name="title" #title="ngModel" required pattern="[a-zA-Z0-9\s ]*" [(ngModel)]="editProductModel.title" minlength="2" placeholder="Product Title">
+            <div class="text-danger" *ngIf="title.dirty && title.errors">
+                <small *ngIf="title.errors.required"> Product Title is mandatory</small>
+                <small *ngIf="title.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="title.errors.pattern"> Please enter valid Product Title</small>
             </div>
             <br><br>
-            <button [ngClass]= "{ 'disabled': form.invalid}" 
-				type="button" (click)="formSubmit(c.id)" [disabled]="form.invalid" class="btn btn-primary ">Edit Category</button>
         </div>
+        <div class="form-group">
+            <label >Description</label>
+            <input [ngClass]= "{ 'bordered': description.dirty && description.errors }" class="input" type="text" name="description" #description="ngModel" required [(ngModel)]="editProductModel.description" minlength="2" placeholder="Product Description">
+            <div class="text-danger" *ngIf="description.dirty && description.errors">
+                <small *ngIf="description.errors.required"> Product Description is mandatory</small>
+                <small *ngIf="description.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="description.errors.pattern"> Please enter valid Product Description</small>
+            </div>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label >Long Description</label>
+            <input [ngClass]= "{ 'bordered': long_description.dirty && long_description.errors }" class="input" type="text" name="long_description" #long_description="ngModel" required pattern="[a-zA-Z0-9\s ]*" [(ngModel)]="editProductModel.long_description" minlength="2" placeholder="Category Long Description">
+            <div class="text-danger" *ngIf="long_description.dirty && long_description.errors">
+                <small *ngIf="long_description.errors.required"> Product Long Description is mandatory</small>
+                <small *ngIf="long_description.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="long_description.errors.pattern"> Please enter valid Product Long Description</small>
+            </div>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label >Short Description</label>
+            <input [ngClass]= "{ 'bordered': short_desc.dirty && short_desc.errors }" class="input" type="text" name="short_desc" #short_desc="ngModel" required pattern="[a-zA-Z0-9\s ]*" [(ngModel)]="editProductModel.short_desc" minlength="2" placeholder="Product Short Description">
+            <div class="text-danger" *ngIf="short_desc.dirty && short_desc.errors">
+                <small *ngIf="short_desc.errors.required"> Product Short Description is mandatory</small>
+                <small *ngIf="short_desc.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="short_desc.errors.pattern"> Please enter valid Product Short Description</small>
+            </div>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label >Image</label>
+            <input [ngClass]= "{ 'bordered': image.dirty && image.errors }" class="input" type="text" name="image" #image="ngModel" required [(ngModel)]="editProductModel.image" minlength="10" placeholder="Product Image">
+            <div class="text-danger" *ngIf="image.dirty && image.errors">
+                <small *ngIf="image.errors.required"> Product Image is mandatory</small>
+                <small *ngIf="image.errors.minlength"> Minimum 10 letter required</small>
+                <small *ngIf="image.errors.pattern"> Please enter valid Product Image</small>
+            </div>
+            <br><br>
+        </div>
+
+        <div class="form-group">
+            <img class="img-fluid" src="{{editProductModel.image}}" alt="Image cannot be displayed"> <br>
+        </div>
+
+        <div class="form-group">
+            <label >Images</label>
+            <input [ngClass]= "{ 'bordered': images.dirty && images.errors }" class="input" type="text" name="images" #images="ngModel" [(ngModel)]="editProductModel.images" minlength="10" placeholder="Product Images">
+            <div class="text-danger" *ngIf="images.dirty && images.errors">
+                
+                <small *ngIf="images.errors.minlength"> Minimum 10 letter required</small>
+                <small *ngIf="images.errors.pattern"> Please enter valid Product Images</small>
+            </div>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label >Price</label>
+            <input [ngClass]= "{ 'bordered': price.dirty && price.errors }" class="input" type="text" name="price" #price="ngModel" required pattern="[0-9]*" [(ngModel)]="editProductModel.price" placeholder="Product Price">
+            <div class="text-danger" *ngIf="price.dirty && price.errors">
+                <small *ngIf="price.errors.required"> Product Price is mandatory</small>
+                <small *ngIf="price.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="price.errors.pattern"> Please enter valid Product Price</small>
+            </div>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label >Quantity</label>
+            <input [ngClass]= "{ 'bordered': quantity.dirty && quantity.errors }" class="input" type="text" name="quantity" #quantity="ngModel" required pattern="[0-9]*" [(ngModel)]="editProductModel.quantity" placeholder="Product Quantity">
+            <div class="text-danger" *ngIf="quantity.dirty && quantity.errors">
+                <small *ngIf="quantity.errors.required"> Product Quantity is mandatory</small>
+                <small *ngIf="quantity.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="quantity.errors.pattern"> Please enter valid Product Quantity</small>
+            </div>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label >Category</label>
+            <input [ngClass]= "{ 'bordered': category.dirty && category.errors }" class="input" type="text" name="category" #category="ngModel" required pattern="[0-9]*" [(ngModel)]="editProductModel.cat_id" placeholder="Product Category">
+            <div class="text-danger" *ngIf="category.dirty && category.errors">
+                <small *ngIf="category.errors.required"> Product Category is mandatory</small>
+                <small *ngIf="category.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="category.errors.pattern"> Please enter valid Product Category</small>
+            </div>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label >Lock</label>
+            <input [ngClass]= "{ 'bordered': lock.dirty && lock.errors }" class="input" type="text" name="lock" #lock="ngModel" required pattern="[0-1]*" [(ngModel)]="editProductModel.lock" placeholder="Product Lock">
+            <div class="text-danger" *ngIf="lock.dirty && lock.errors">
+                <small *ngIf="lock.errors.required"> Product Lock is mandatory</small>
+                <small *ngIf="lock.errors.minlength"> Minimum 2 letter required</small>
+                <small *ngIf="lock.errors.pattern"> Please enter valid Product Lock</small>
+            </div>
+            <br><br>
+        </div>
+        <button [ngClass]= "{ 'disabled': form.invalid}" 
+				type="button" (click)="editFormSubmit()" [disabled]="form.invalid" class="btn btn-primary ">Submit</button>
+        
     </form>
+
+    <!-- Edit Product Tab Ends-->
+
     </li>
 </ul> 
 
 <br><br> 
+
+<!--Add Product Tab-->
+
+<button  (click)="addProduct()" class="btn btn-primary" >Add Product</button>
+<br><br>
+
+<form *ngIf="addMode" #form = "ngForm">
+    <div class="form-group">
+        <label >Title</label>
+        <input [ngClass]= "{ 'bordered': title.dirty && title.errors }" class="input" type="text" name="title" #title="ngModel" required pattern="[a-zA-Z0-9\s ]*" [(ngModel)]="addProductModel.title" minlength="2" placeholder="Product Title">
+        <div class="text-danger" *ngIf="title.dirty && title.errors">
+            <small *ngIf="title.errors.required"> Product Title is mandatory</small>
+            <small *ngIf="title.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="title.errors.pattern"> Please enter valid Product Title</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Description</label>
+        <input [ngClass]= "{ 'bordered': description.dirty && description.errors }" class="input" type="text" name="description" #description="ngModel" required [(ngModel)]="addProductModel.description" minlength="2" placeholder="Product Description">
+        <div class="text-danger" *ngIf="description.dirty && description.errors">
+            <small *ngIf="description.errors.required"> Product Description is mandatory</small>
+            <small *ngIf="description.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="description.errors.pattern"> Please enter valid Product Description</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Long Description</label>
+        <input [ngClass]= "{ 'bordered': long_description.dirty && long_description.errors }" class="input" type="text" name="long_description" #long_description="ngModel" required pattern="[a-zA-Z0-9\s ]*" [(ngModel)]="addProductModel.long_description" minlength="2" placeholder="Category Long Description">
+        <div class="text-danger" *ngIf="long_description.dirty && long_description.errors">
+            <small *ngIf="long_description.errors.required"> Product Long Description is mandatory</small>
+            <small *ngIf="long_description.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="long_description.errors.pattern"> Please enter valid Product Long Description</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Short Description</label>
+        <input [ngClass]= "{ 'bordered': short_desc.dirty && short_desc.errors }" class="input" type="text" name="short_desc" #short_desc="ngModel" required pattern="[a-zA-Z0-9\s ]*" [(ngModel)]="addProductModel.short_desc" minlength="2" placeholder="Product Short Description">
+        <div class="text-danger" *ngIf="short_desc.dirty && short_desc.errors">
+            <small *ngIf="short_desc.errors.required"> Product Short Description is mandatory</small>
+            <small *ngIf="short_desc.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="short_desc.errors.pattern"> Please enter valid Product Short Description</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Image</label>
+        <input [ngClass]= "{ 'bordered': image.dirty && image.errors }" class="input" type="text" name="image" #image="ngModel" required [(ngModel)]="addProductModel.image" minlength="10" placeholder="Product Image">
+        <div class="text-danger" *ngIf="image.dirty && image.errors">
+            <small *ngIf="image.errors.required"> Product Image is mandatory</small>
+            <small *ngIf="image.errors.minlength"> Minimum 10 letter required</small>
+            <small *ngIf="image.errors.pattern"> Please enter valid Product Image</small>
+        </div>
+        <br><br>
+    </div>
+
+    <div class="form-group">
+        <img class="img-fluid" src="{{addProductModel.image}}" alt="Image cannot be displayed"> <br>
+    </div>
+
+    <div class="form-group">
+        <label >Images</label>
+        <input [ngClass]= "{ 'bordered': images.dirty && images.errors }" class="input" type="text" name="images" #images="ngModel" [(ngModel)]="addProductModel.images" minlength="10" placeholder="Product Images">
+        <div class="text-danger" *ngIf="images.dirty && images.errors">
+            
+            <small *ngIf="images.errors.minlength"> Minimum 10 letter required</small>
+            <small *ngIf="images.errors.pattern"> Please enter valid Product Images</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Price</label>
+        <input [ngClass]= "{ 'bordered': price.dirty && price.errors }" class="input" type="text" name="price" #price="ngModel" required pattern="[0-9]*" [(ngModel)]="addProductModel.price" placeholder="Product Price">
+        <div class="text-danger" *ngIf="price.dirty && price.errors">
+            <small *ngIf="price.errors.required"> Product Price is mandatory</small>
+            <small *ngIf="price.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="price.errors.pattern"> Please enter valid Product Price</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Quantity</label>
+        <input [ngClass]= "{ 'bordered': quantity.dirty && quantity.errors }" class="input" type="text" name="quantity" #quantity="ngModel" required pattern="[0-9]*" [(ngModel)]="addProductModel.quantity" placeholder="Product Quantity">
+        <div class="text-danger" *ngIf="quantity.dirty && quantity.errors">
+            <small *ngIf="quantity.errors.required"> Product Quantity is mandatory</small>
+            <small *ngIf="quantity.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="quantity.errors.pattern"> Please enter valid Product Quantity</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Category</label>
+        <input [ngClass]= "{ 'bordered': category.dirty && category.errors }" class="input" type="text" name="category" #category="ngModel" required pattern="[0-9]*" [(ngModel)]="addProductModel.cat_id" placeholder="Product Category">
+        <div class="text-danger" *ngIf="category.dirty && category.errors">
+            <small *ngIf="category.errors.required"> Product Category is mandatory</small>
+            <small *ngIf="category.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="category.errors.pattern"> Please enter valid Product Category</small>
+        </div>
+        <br><br>
+    </div>
+    <div class="form-group">
+        <label >Lock</label>
+        <input [ngClass]= "{ 'bordered': lock.dirty && lock.errors }" class="input" type="text" name="lock" #lock="ngModel" required pattern="[0-1]*" [(ngModel)]="addProductModel.lock" placeholder="Product Lock">
+        <div class="text-danger" *ngIf="lock.dirty && lock.errors">
+            <small *ngIf="lock.errors.required"> Product Lock is mandatory</small>
+            <small *ngIf="lock.errors.minlength"> Minimum 2 letter required</small>
+            <small *ngIf="lock.errors.pattern"> Please enter valid Product Lock</small>
+        </div>
+        <br><br>
+    </div>
+    <button [ngClass]= "{ 'disabled': form.invalid}" 
+            type="button" (click)="addProductSubmit()" [disabled]="form.invalid" class="btn btn-primary ">Submit</button>
+    
+</form>
+
+<!--Add Product Tab Ends-->

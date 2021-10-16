@@ -56,5 +56,36 @@ export class AdminService {
       return this.http.get(this.SERVER_URL + '/admin/getproducts', options);
     }
 
+    editProduct(product:any): Observable<any>{
+
+      const options = {
+            headers: {
+              'authorization': 'Bearer ' + this.authService.adminToken
+            }
+          };
+      return this.http.post(this.SERVER_URL + '/admin/editproduct', product, options);
+    }
+
+    deleteProduct(id:string): Observable<any>{
+
+      const options = {
+            headers: {
+              'authorization': 'Bearer ' + this.authService.adminToken
+            }
+          };
+      return this.http.get(this.SERVER_URL + '/admin/deleteproduct?id=' + id, options);
+    }
+
+    addProduct(product:any): Observable<any>{
+
+      const options = {
+            headers: {
+              'authorization': 'Bearer ' + this.authService.adminToken
+            }
+          };
+      return this.http.post(this.SERVER_URL + '/admin/addproduct', product, options);
+    }
+    
+
 
 }
