@@ -1,0 +1,9 @@
+.delivered{
+    font-weight: bold;
+    color: green;
+}
+
+.pending{
+    font-weight: bold;
+    color: red;
+}

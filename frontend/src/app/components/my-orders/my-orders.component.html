@@ -38,9 +38,9 @@
                                 <br><br><br>
                                 <h6>Order Status - {{ o.order_status }}</h6>
                                 <h6 *ngIf="o.delivered_date">Delivered Date - {{ o.delivered_date }}</h6>
-                                <h6 *ngIf="o.delivery_date">Estimated Delivery Date - {{o.delivery_date}}</h6>
+                                <h6 *ngIf="o.delivery_date && !o.delivered_date">Estimated Delivery Date - {{o.delivery_date}}</h6>
                                 <br>
-                                <button (click)="cancelOrder(o.orderId, o.productId, o.quantity)" *ngIf="o.delivery_date" class="btn cancel-button">Cancel Order</button>
+                                <button (click)="cancelOrder(o.orderId, o.productId, o.quantity)" *ngIf="!o.delivered_date" class="btn cancel-button">Cancel Order</button>
                             </div>
 
                         </div>

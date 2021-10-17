@@ -14,6 +14,8 @@ export class AdminHomeComponent implements OnInit {
   ngOnInit(): void {
     if(!this.authService.isAdminLoggedIn){
       this.router.navigate(['/adminlogin']);
+    }else{
+      this.router.navigate(['/adminhome/orders']);
     }
   }
 

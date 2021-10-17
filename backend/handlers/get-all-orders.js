@@ -10,10 +10,10 @@ module.exports = function (req, resp) {
     // const skip = (page - 1) * limit;
 
     const userId = req.query.user;
-    const sql = 'select od.id, p.title as productName, p.description, p.price, u.username from order_details od ' +
+    const sql = 'select od.id, p.title as productName, p.description, p.price, od.quantity, u.email, u.username, od.address_details , od.order_status, od.delivery_date, od.delivered_date from order_details od ' +
     'join products p ' + 
     'on od.product_id = p.id join users u ' + 
-    'on od.user_id = u.id where u.id = ' + userId + ' order by od.id';
+    'on od.user_id = u.id order by od.id';
 
     const conn = mysql.createConnection(mysqlCfg);
     conn.on('error', function(err) {
@@ -25,6 +25,7 @@ module.exports = function (req, resp) {
     conn.query(sql,
         (err, rows) => {
             if (err) {
+                console.log(err);
                 resp.json({
                     statusCode: "500",
                     message: "Something went wrong",

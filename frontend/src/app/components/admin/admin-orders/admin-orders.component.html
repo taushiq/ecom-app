@@ -1,1 +1,46 @@
-<p>admin-orders works!</p>
+<br>
+<h5>The Orders currently present are below</h5>
+<br>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let o of orders; let i  = index">
+        {{o.productName}} <span [ngClass]= "{ 'pending': !o.delivered_date, 'delivered' : o.delivered_date }" >{{ o.delivered_date ? '(Delivered)' : '(Pending)' }}</span><div class="float-right"><button class="btn btn-primary " (click)="detailsClicked(i)">Details</button ></div>
+
+            <br><br>
+        
+        <!-- Details tab -->
+    <div style="overflow:auto" class="container" *ngIf="detailsMode && i == detailsIndex">
+        <span style="font-weight: bold;">Order Id : </span> <span>{{o.id}}</span> <br>
+        <span style="font-weight: bold;">Order Quantity : </span> <span>{{o.quantity}}</span> <br>
+        <span style="font-weight: bold;">Order Address Details : </span> <span>{{o.address_details}}</span> <br>
+        <span style="font-weight: bold;">Order Username : </span> <span>{{o.username}}</span> <br>
+        <span style="font-weight: bold;">Order Email : </span> <span>{{o.email}}</span> <br>
+        <span style="font-weight: bold;">Order Product Price : </span> <span>{{o.price}}</span> <br>
+        <span style="font-weight: bold;">Order Status : </span> <span>{{o.order_status}}</span> <br>
+        <span style="font-weight: bold;">Order Delivery Date : </span> <span>{{o.delivery_date}}</span> <br>
+        <span style="font-weight: bold;">Order Delivered Date : </span> <span>{{o.delivered_date}}</span> <br>
+        
+         <button *ngIf="!o.delivered_date" (click)="outForDelivery()" class=" mt-2 mr-2 btn btn-primary">Out for Delivery Notification</button> <button *ngIf="!o.delivered_date" (click)="markAsDelivered()" class="mr-2 mt-2 btn btn-primary">Mark as Delivered</button><button *ngIf="!o.delivered_date" (click)="updateDeliveryDateButtonClicked(i)" class="mt-2 btn btn-primary">Update Delivery Date</button>
+
+        
+    </div>
+    <!-- Details tab ends -->
+
+    <!-- Update Delivery Date Form -->
+    <br>
+    <form *ngIf="editMode && i == index" #form = "ngForm">
+        <div class="form-group">
+            <input [ngClass]= "{ 'bordered': delivery_date.dirty && delivery_date.errors }" class="input" type="date" name="delivery_date" #delivery_date="ngModel" required [(ngModel)]="deliveryDate"  placeholder="Delivery Date">
+            <div class="text-danger" *ngIf="delivery_date.dirty && delivery_date.errors">
+                <small *ngIf="delivery_date.errors.required"> Delivery Date is mandatory</small>
+                
+            </div>
+            <br><br>
+            <button [ngClass]= "{ 'disabled': form.invalid}" 
+				type="button" (click)="formSubmit()" [disabled]="form.invalid" class="btn btn-primary ">Submit</button>
+        </div>
+    </form>
+
+    <!-- Update Delivery Date Form -->
+    </li>
+</ul>

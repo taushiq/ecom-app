@@ -41,6 +41,9 @@ app.get('/warehouse/myorders/cancel', require('./handlers/cancel-order'));
 
 app.get('/warehouse/myorders', require('./handlers/get-my-orders'));
 
+//get all the orders
+app.get('/warehouse/orders', require('./handlers/get-all-orders'));
+
 app.get('/warehouse/:prodId', require('./handlers/get-one-product'));
 // middleware to check if the request contains JWT token in the form of a header, and 
 // allow the user to access any routes, only if the JWT is present and not-tampered
@@ -48,7 +51,6 @@ app.get('/warehouse/:prodId', require('./handlers/get-one-product'));
 
 
 //to get all the order details
-app.get('/warehouse/orders', require('./handlers/get-all-orders'));
 
 // ----------------  Admin Section  --------------- //
 //to get all the categories
@@ -75,6 +77,14 @@ app.get('/warehouse/admin/deleteproduct', require('./handlers/delete-product'));
 //to add a product
 app.post('/warehouse/admin/addproduct', require('./handlers/add-product'));
 
+//out for delivery notification
+app.post('/warehouse/admin/outfordelivery', require('./handlers/out-for-delivery'));
+
+//update delivery date
+app.get('/warehouse/admin/updatedeliverydate', require('./handlers/update-delivery-date'));
+
+//mark order as delivered
+app.get('/warehouse/admin/orderdelivered', require('./handlers/mark-as-delivered'));
 
 //  ------------- Admin Section Ends ------------- //
 

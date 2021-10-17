@@ -85,6 +85,50 @@ export class AdminService {
           };
       return this.http.post(this.SERVER_URL + '/admin/addproduct', product, options);
     }
+
+
+    getAllOrders(): Observable<any>{
+
+      const options = {
+            headers: {
+              'authorization': 'Bearer ' + this.authService.adminToken
+            }
+          };
+      return this.http.get(this.SERVER_URL + '/orders', options);
+    }
+
+    outForDelivery(orderDetails:any): Observable<any>{
+
+      const options = {
+            headers: {
+              'authorization': 'Bearer ' + this.authService.adminToken
+            }
+          };
+      return this.http.post(this.SERVER_URL + '/admin/outfordelivery', orderDetails, options);
+    }
+
+    updateDeliveryDate(deliveryDate, orderId, productName, email): Observable<any>{
+
+      const options = {
+            headers: {
+              'authorization': 'Bearer ' + this.authService.adminToken
+            }
+          };
+      return this.http.get(this.SERVER_URL + '/admin/updatedeliverydate?deliveryDate=' + deliveryDate + '&orderId=' + orderId + '&productName=' + productName + '&email=' + email, options);
+    }
+
+    markAsDelivered(orderId, productName, email): Observable<any>{
+
+      const options = {
+            headers: {
+              'authorization': 'Bearer ' + this.authService.adminToken
+            }
+          };
+      return this.http.get(this.SERVER_URL + '/admin/orderdelivered?orderId=' + orderId + '&productName=' + productName + '&email=' + email, options);
+    }
+
+    
+    
     
 
 
