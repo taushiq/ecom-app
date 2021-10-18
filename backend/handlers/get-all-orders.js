@@ -17,6 +17,7 @@ module.exports = function (req, resp) {
 
     const conn = mysql.createConnection(mysqlCfg);
     conn.on('error', function(err) {
+        conn.end();
         resp.json({
             statusCode: "500",
             message: "Something went wrong",
@@ -24,6 +25,7 @@ module.exports = function (req, resp) {
       });
     conn.query(sql,
         (err, rows) => {
+            
             if (err) {
                 console.log(err);
                 resp.json({
@@ -31,6 +33,7 @@ module.exports = function (req, resp) {
                     message: "Something went wrong",
                 })
             }else{
+
                 resp.json({
                     statusCode: "200",
                     data: rows,

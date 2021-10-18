@@ -14,6 +14,7 @@ module.exports = (req, resp) => {
         conn.query(sql, data, (err, results) => {
             
             if (err){
+                conn.end();
                 resp.json({
                     status:500,
                     message: "something_went_wrong"

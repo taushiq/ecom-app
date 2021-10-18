@@ -12,6 +12,7 @@ module.exports = function (req, resp) {
 
     const conn = mysql.createConnection(mysqlCfg);
     conn.on('error', function(err) {
+        conn.end();
         resp.json({
             statusCode: "500",
             message: "Something went wrong",
@@ -20,7 +21,9 @@ module.exports = function (req, resp) {
     conn.query("select c.title as category, p.title as name, p.description, p.price, p.quantity, p.image, p.id from products p join categories c on c.id = p.cat_id where c.id like ? order by id limit ? offset ? ",
         [catId, parseInt(limit), skip],
         (err, rows) => {
+            
             if (err) {
+                conn.end();
                 resp.json({
                     statusCode: "500",
                     message: "Something went wrong",
@@ -29,11 +32,13 @@ module.exports = function (req, resp) {
                 conn.query('select count(*) as count from products p join categories c on c.id = p.cat_id where c.id like ?  ', [catId], 
                 (err, result)=>{
                     if(err) {
+                        conn.end();
                         resp.json({
                             statusCode: "500",
                             message: "Something went wrong",
                         })
                     }else{
+                        conn.end();
                         resp.json({
                             statusCode: "200",
                             data: rows,
@@ -45,7 +50,7 @@ module.exports = function (req, resp) {
             
             
 
-                conn.end();
+                
 
         });
     

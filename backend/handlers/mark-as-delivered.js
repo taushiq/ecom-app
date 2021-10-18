@@ -15,6 +15,7 @@ module.exports = function (req, resp) {
 
     const conn = mysql.createConnection(mysqlCfg);
     conn.on('error', function(err) {
+        conn.end();
         resp.json({
             statusCode: "500",
             message: "Something went wrong",
@@ -23,6 +24,7 @@ module.exports = function (req, resp) {
     conn.query('update order_details set delivered_date = ? , order_status = "Delivered" where id = ?', [ deliveredDate, orderId ],
         (err, rows) => {
             if (err) {
+                conn.end();
                 resp.json({
                     statusCode: "500",
                     message: "Something went wrong",
@@ -30,6 +32,7 @@ module.exports = function (req, resp) {
             }else{
                 
                 sendEmail();
+                conn.end();
                 resp.json({
                     statusCode: "200",
                     data: rows
@@ -44,16 +47,16 @@ module.exports = function (req, resp) {
             
             // create reusable transporter object using the default SMTP transport
             let transporter = nodemailer.createTransport({
-                host: "smtp.gmail.com",
+                host: "premium34.web-hosting.com",
                 auth: {
-                user: 'taushiq.awais007@gmail.com', // generated ethereal user
-                pass: 'Aasiakhatoon', // generated ethereal password
+                user: 'emailfromtaushiq@taushiqswebsite.com', // generated ethereal user
+                pass: 'ecom@ecom', // generated ethereal password
                 },
             });
     
             // send mail with defined transport object
             let info = await transporter.sendMail({
-                from: 'Taushiq Awais <taushiq.awais007@gmail.com>', // sender address
+                from: 'emailfromtaushiq@taushiqswebsite.com', // sender address
                 to: email, // list of receivers
                 subject: "Order Delivered", // Subject line
                 text: "Your Order has been delivered", // plain text body

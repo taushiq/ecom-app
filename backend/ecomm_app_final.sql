@@ -21,6 +21,8 @@ CREATE TABLE `users` (
   `loginTime` datetime
 );
 
+delete from users;
+
 insert into users values (2, 'taushiq.awais007@gmail.com', '098F6BCD4621D373CADE4E832627B4F6', 'taushiq.awais007@gmail.com', 'Taushiq', 'Awais', 18, 0, null, 'admin', null, null);
 
 select * from users;
@@ -40,6 +42,8 @@ CREATE TABLE `addresses` (
   `user_id` int NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+delete from addresses;
 
 drop table categories;
 
@@ -158,6 +162,7 @@ CREATE TABLE `cancelled_orders` (
   FOREIGN KEY (user_id) references users(id)
 );
 
+delete from cancelled_orders;
 
 delete from order_details;
 

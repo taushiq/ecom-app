@@ -13,7 +13,7 @@ module.exports = (req, resp) => {
         const conn = mysql.createConnection(mysqlCfg);
         conn.query(sql, data, (err, results) => {
             
-            if (err) throw err;
+            
 
             const isValidUser = (results.length === 1);
 

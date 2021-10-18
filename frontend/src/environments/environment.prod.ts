@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  SERVER_URL : "http://localhost:3000/warehouse"
+  SERVER_URL : "https://ecom-app-backend.taushiqswebsite.com/warehouse"
 };

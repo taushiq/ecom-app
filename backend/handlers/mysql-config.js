@@ -1,10 +1,10 @@
-module.exports = {
-    host: 'localhost',
-    port: 3306,
-    database: 'ecomm_app',
-    user: 'root',
-    password: 'Admin@123'
-};
+// module.exports = {
+//     host: 'localhost',
+//     port: 3306,
+//     database: 'ecomm_app',
+//     user: 'root',
+//     password: 'Admin@123'
+// };
 
 //remote
 // module.exports = {
@@ -14,3 +14,11 @@ module.exports = {
 //     user: '5PJ8RGg4yy',
 //     password: 'Y7VsxHDGyN'
 // };
+
+//Hosting
+module.exports = {
+    host: 'localhost',
+    database: 'tausglth_ecom_app',
+    user: 'tausglth_ecom_app_user',
+    password: 'ecom@ecom'
+};

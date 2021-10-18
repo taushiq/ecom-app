@@ -11,6 +11,7 @@ module.exports = function (req, resp) {
 
     const conn = mysql.createConnection(mysqlCfg);
     conn.on('error', function(err) {
+        conn.end();
         resp.json({
             statusCode: "500",
             message: "Something went wrong",
@@ -20,6 +21,7 @@ module.exports = function (req, resp) {
         [parseInt(limit), skip],
         (err, rows) => {
             if (err) {
+                conn.end();
                 resp.json({
                     statusCode: "500",
                     message: "Something went wrong",
@@ -28,6 +30,7 @@ module.exports = function (req, resp) {
                 conn.query('select count(*) as count from products', 
                 (err, result)=>{
                     if(err) {
+                        conn.end();
                         resp.json({
                             statusCode: "500",
                             message: "Something went wrong",
@@ -37,6 +40,7 @@ module.exports = function (req, resp) {
                         conn.query('select * from categories',
                         (err, catResult)=>{
                             if(err) {
+                                conn.end();
                                 resp.json({
                                     statusCode: "500",
                                     message: "Something went wrong",

@@ -22,12 +22,14 @@ module.exports = async function (req, resp) {
     const conn = mysql.createConnection(mysqlCfg);
     
     if(otpvalue == null || email == null || password == null || fname == null || lname == null || lineone == null || linetwo == null || pincode == null || city == null || state == null || country == null || phone == null){
+        conn.end();
         resp.json({
             statusCode: "200",
             message: "value_missing"
         });
     }else{
         conn.on('error', function(err) {
+            conn.end();
             resp.json({
                 statusCode: "500",
                 message: "Something went wrong",
@@ -35,6 +37,7 @@ module.exports = async function (req, resp) {
           });
     
         if(req.body.email == null || req.body.email == ""){
+            conn.end();
             resp.json({
                 statusCode: "500",
                 message: "Something went wrong",
@@ -43,6 +46,7 @@ module.exports = async function (req, resp) {
             const fetchOtpResult = await fetchOtp();
             if(fetchOtpResult){
                 if(req.body.otpvalue != otpFetchedValue){
+                    conn.end();
                     resp.json({
                         statusCode: "500",
                         message: "otp_mismatch",
@@ -50,11 +54,13 @@ module.exports = async function (req, resp) {
                 }else{
                     const isUserRegistered = await registerUser();
                     if(isUserRegistered){
+                        conn.end();
                         resp.json({
                             statusCode: "200",
                             message: "success",
                         });
                     }else{
+                        conn.end();
                         resp.json({
                             statusCode: "500",
                             message: "Something went wrong",
@@ -62,6 +68,7 @@ module.exports = async function (req, resp) {
                     }
                 }
             }else{
+                conn.end();
                 resp.json({
                     statusCode: "500",
                     message: "Something went wrong",

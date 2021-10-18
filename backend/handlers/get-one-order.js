@@ -16,11 +16,19 @@ module.exports = function (req, resp) {
     const conn = mysql.createConnection(mysqlCfg);
     conn.query(sql,
         (err, rows) => {
-            if (err) throw err;
+            if(err){
+                resp.json({
+                    statusCode:"500"
+                })
+            }
             
             conn.query('select count(*) as count from orders_details', 
                 (err, result)=>{
-                    if(err) throw err;
+                    if(err){
+                        resp.json({
+                            statusCode:"500"
+                        })
+                    }
 
                     resp.json({
                         data: rows,

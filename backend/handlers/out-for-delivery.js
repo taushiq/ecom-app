@@ -29,16 +29,16 @@ module.exports = function (req, resp) {
             
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
+            host: "premium34.web-hosting.com",
             auth: {
-            user: 'taushiq.awais007@gmail.com', // generated ethereal user
-            pass: 'Aasiakhatoon', // generated ethereal password
+            user: 'emailfromtaushiq@taushiqswebsite.com', // generated ethereal user
+            pass: 'ecom@ecom', // generated ethereal password
             },
         });
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: 'Taushiq Awais <taushiq.awais007@gmail.com>', // sender address
+            from: 'emailfromtaushiq@taushiqswebsite.com', // sender address
             to: email, // list of receivers
             subject: "Out for Delivery", // Subject line
             text: "Your Order is Out for Delivery", // plain text body

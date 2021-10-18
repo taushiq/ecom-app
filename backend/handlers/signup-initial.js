@@ -11,6 +11,7 @@ module.exports = async function (req, resp) {
 
     const conn = mysql.createConnection(mysqlCfg);
     conn.on('error', function(err) {
+        conn.end();
         resp.json({
             statusCode: "500",
             message: "Something went wrong",
@@ -18,6 +19,7 @@ module.exports = async function (req, resp) {
       });
 
     if(req.body.email == null || req.body.email == ""){
+        conn.end();
         resp.json({
             statusCode: "500",
             message: "Something went wrong",
@@ -33,11 +35,13 @@ module.exports = async function (req, resp) {
                         if(otpEmail){
                             var otpUpdated = await updateOtp();
                             if(otpUpdated){
+                                conn.end();
                                 resp.json({
                                     statusCode: "200",
                                     message: "email_sent"
                                 });
                             }else{
+                                conn.end();
                                 resp.json({
                                     statusCode: "500",
                                     message: "email_could_not_be_sent"
@@ -46,11 +50,13 @@ module.exports = async function (req, resp) {
                         }else{
                             var otpInserted = await insertOtp();
                             if(otpInserted){
+                                conn.end();
                                 resp.json({
                                     statusCode: "200",
                                     message: "email_sent"
                                 });
                             }else{
+                                conn.end();
                                 resp.json({
                                     statusCode: "500",
                                     message: "email_could_not_be_sent"
@@ -60,6 +66,7 @@ module.exports = async function (req, resp) {
                     }
                     
                 }else{
+                    conn.end();
                     resp.json({
                         statusCode: "500",
                         message: "email_could_not_be_sent"
@@ -67,6 +74,7 @@ module.exports = async function (req, resp) {
                 }
     
             }else{
+                conn.end();
                 resp.json({
                     statusCode: "200",
                     message: "email_already_registered"
@@ -74,6 +82,7 @@ module.exports = async function (req, resp) {
             }
     
         }else{
+            conn.end();
             resp.json({
                 statusCode: "500",
                 message: "Something went wrong",
@@ -152,16 +161,16 @@ module.exports = async function (req, resp) {
         otp = Math.floor(1000 + Math.random() * 9000);
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
+            host: "premium34.web-hosting.com",
             auth: {
-            user: 'taushiq.awais007@gmail.com', // generated ethereal user
-            pass: 'Aasiakhatoon', // generated ethereal password
+            user: 'emailfromtaushiq@taushiqswebsite.com', // generated ethereal user
+            pass: 'ecom@ecom', // generated ethereal password
             },
         });
 
         // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: 'Taushiq Awais <taushiq.awais007@gmail.com>', // sender address
+            from: 'emailfromtaushiq@taushiqswebsite.com', // sender address
             to: email, // list of receivers
             subject: "Ecommerce App Sign Up", // Subject line
             text: "OTP Verification", // plain text body

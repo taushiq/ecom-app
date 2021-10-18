@@ -17,13 +17,14 @@ module.exports = function (req, resp) {
     conn.query('insert into categories ( title , image ) values ( ? , ? ) ',
         [catName, catImage],
         (err, rows) => {
+            conn.end();
             if (err) {
                 resp.json({
                     statusCode: "500",
                     message: "Something went wrong",
                 })
             }else{
-                        
+                conn.end();       
                 resp.json({
                     statusCode: "200",
                     message: "success",
